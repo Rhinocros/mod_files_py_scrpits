@@ -28,7 +28,7 @@ def get_h2(files_path):
 
 
 def mod_file(lines, file, des, h2):
-    lines.insert(2, h2)
+    lines.insert(2, h2)  # 插入到第三行
     s = ''.join(lines)
     # print(s)
     f = open(file, 'w+')  # 重新写入文件
