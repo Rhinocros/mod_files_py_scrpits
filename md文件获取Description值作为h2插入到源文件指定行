@@ -25,16 +25,15 @@ def get_h2(targetfile):
                 rs = line.replace('\n', '')
                 # print(rs)
                 des.append(rs)
-        desss = re.findall(r'Description: "(.*?)"', str(des))
+        desss = re.findall(r'Description: "(.*?)"', str(des))  #正则获取md文件里Description:后的内容
         # print(str(desss))
     for de in desss:
         des_final = de.replace('\\xa0', ' ')
     h2 = 'title_h2: ' + des_final + '\n'
     mod_file(lines, file, des, h2)
-
     # print(h2)
 def mod_file(lines, file, des, h2):
-    lines.insert(2, h2)
+    lines.insert(2, h2)   #在第三行插入h2的值
     s = ''.join(lines)
     # print(s)
     f = open(file, 'w+')  # 重新写入文件
