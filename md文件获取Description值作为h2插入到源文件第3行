@@ -1,0 +1,48 @@
+#-*- coding:utf-8 -*-
+import re
+import os
+
+targetfile = []
+filepath = ''   #文件夹目录
+
+def eachfile(filepath):
+    pathdir = os.listdir(filepath)
+    for s in pathdir:
+        newdir = os.path.join(filepath, s)  # 将文件名加入到当前文件路径后面
+        if os.path.isfile(newdir):  # 如果是文件
+            if os.path.splitext(newdir)[1] == ".md":  # 如果文件是".md后缀的
+                soundfile.append(newdir)
+        elif os.path.isdir(newdir):  # 如果是路径
+            eachfile(newdir)  # 递归
+    get_h2(targetfile)
+def get_h2(targetfile):
+    des = []
+    for file in targetfile:
+        with open(file) as f:
+            lines = f.readlines()
+            f.close()
+            for line in lines:
+                rs = line.replace('\n', '')
+                # print(rs)
+                des.append(rs)
+        desss = re.findall(r'Description: "(.*?)"', str(des))
+        # print(str(desss))
+    for de in desss:
+        des_final = de.replace('\\xa0', ' ')
+    h2 = 'title_h2: ' + des_final + '\n'
+    mod_file(lines, file, des, h2)
+
+    # print(h2)
+def mod_file(lines, file, des, h2):
+    lines.insert(2, h2)
+    s = ''.join(lines)
+    # print(s)
+    f = open(file, 'w+')  # 重新写入文件
+    f.write(s)
+    f.close()
+    print(f)
+    del des[:]  # 清空列表
+    # print(des)
+
+if __name__=='__main__':
+    eachfile(filepath)
