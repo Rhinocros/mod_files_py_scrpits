@@ -1,2 +1,3 @@
-# mod_files_py_scrpits
-mod txt, md, html and so on files by python
+Pyhthon实现平时工作中的需求
+
+如果也符合你的需求，可以适当修改文件目录，文件名等内容，方便自己使用
